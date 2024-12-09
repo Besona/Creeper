@@ -1,0 +1,12 @@
+Time Precise: nanosecond
+Time: ./input/g_100_100_50_300_500_9.png: AVG: 236418 MAX: 270292
+Time: ./input/g_100_100_50_300_500_8.png: AVG: 219884 MAX: 234583
+Time: ./input/g_100_100_50_300_500_5.png: AVG: 227291 MAX: 235583
+Time: ./input/g_100_100_50_300_500_4.png: AVG: 231701 MAX: 252625
+Time: ./input/g_100_100_50_300_500_6.png: AVG: 234000 MAX: 235875
+Time: ./input/g_100_100_50_300_500_7.png: AVG: 233603 MAX: 234416
+Time: ./input/g_100_100_50_300_500_3.png: AVG: 233782 MAX: 241666
+Time: ./input/g_100_100_50_300_500_2.png: AVG: 220545 MAX: 235625
+Time: ./input/g_100_100_50_300_500_0.png: AVG: 227373 MAX: 235208
+Time: ./input/g_100_100_50_300_500_1.png: AVG: 234162 MAX: 259000
+TOT_AVG: 229873 TOT_MAX 270292
