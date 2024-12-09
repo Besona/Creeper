@@ -42,14 +42,14 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-O0 -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -fcolor-diagnostics"
+					"fragment" : "-g -O0 -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -fcolor-diagnostics"
 				}
 			],
 			"includes" : 
 			[
 				{
 					"backtrace" : 2,
-					"path" : "/Users/besona/Desktop/Creeper/include"
+					"path" : "/Users/besona/Desktop/Creeper/Creeper/include"
 				}
 			],
 			"language" : "CXX",
@@ -74,7 +74,7 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "-O0",
+				"fragment" : "-g -O0",
 				"role" : "flags"
 			},
 			{

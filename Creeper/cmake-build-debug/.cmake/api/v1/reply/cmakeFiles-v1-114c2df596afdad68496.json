@@ -1223,8 +1223,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "/Users/besona/Desktop/Creeper/cmake-build-debug",
-		"source" : "/Users/besona/Desktop/Creeper"
+		"build" : "/Users/besona/Desktop/Creeper/Creeper/cmake-build-debug",
+		"source" : "/Users/besona/Desktop/Creeper/Creeper"
 	},
 	"version" : 
 	{

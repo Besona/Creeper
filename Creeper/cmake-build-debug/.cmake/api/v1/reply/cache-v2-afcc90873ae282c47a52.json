@@ -43,7 +43,7 @@
 				}
 			],
 			"type" : "STRING",
-			"value" : "Release"
+			"value" : "Debug"
 		},
 		{
 			"name" : "CMAKE_CACHEFILE_DIR",
@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/besona/Desktop/Creeper/cmake-build-release"
+			"value" : "/Users/besona/Desktop/Creeper/Creeper/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -479,7 +479,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/besona/Desktop/Creeper/cmake-build-release/CMakeFiles/pkgRedirects"
+			"value" : "/Users/besona/Desktop/Creeper/Creeper/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -539,7 +539,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/besona/Desktop/Creeper"
+			"value" : "/Users/besona/Desktop/Creeper/Creeper"
 		},
 		{
 			"name" : "CMAKE_INSTALL_NAME_TOOL",
@@ -1127,7 +1127,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/besona/Desktop/Creeper/cmake-build-release"
+			"value" : "/Users/besona/Desktop/Creeper/Creeper/cmake-build-debug"
 		},
 		{
 			"name" : "Creeper_IS_TOP_LEVEL",
@@ -1151,7 +1151,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/besona/Desktop/Creeper"
+			"value" : "/Users/besona/Desktop/Creeper/Creeper"
 		}
 	],
 	"kind" : "cache",

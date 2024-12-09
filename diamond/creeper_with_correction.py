@@ -109,11 +109,6 @@ def main():
 
     scores_matrix = np.array(scores_matrix)
 
-    # 根据 detection_range 和 max_cols 构建 X,Y
-    # correction 步长为5，从0开始，个数为max_cols
-    # 同时要确保Y维度与row_scores列数对应
-    # 为了对齐，我们假设 correction 从0开始，每列代表下一个5的步长
-    # 因为我们只在0和5两点进行，这里构造对应的Y
     Y_values = [i*5 for i in range(max_cols)]
     X, Y = np.meshgrid(list(detection_range), Y_values)
     Z = scores_matrix.T
