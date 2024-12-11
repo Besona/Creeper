@@ -36,19 +36,16 @@ visualization = True  # 启用可视化
 rounds = 10  # 每个蒙图率测试的次数
 
 
-def generate_test_image(cover_ratio):
-    """生成测试图片和对应蒙图"""
-    # 生成无蒙版的图像
-    img = generate_image(width, height, num_points, low_bound, up_bound, scale, sigma, rv)
-    img.save(f"{input_path}graph.png")
-
-    # 生成蒙版图像
-    cover_img = generate_noise_image(width, height, cover_ratio)
-    cover_img.save(f"{input_path}cover_graph.png")
+def generate_test_images(rounds, cover_ratio):
+    images = []
+    for _ in range(rounds):
+        img = generate_image(width, height, num_points, low_bound, up_bound, scale, sigma, rv)
+        cover_img = generate_noise_image(width, height, cover_ratio)
+        images.append((img, cover_img))
+    return images
 
 
 def run_algorithm():
-    """运行蒙图算法并提取得分"""
     print(f"Running {algo_type} algorithm for cover ratio...")
 
     command = [
@@ -74,7 +71,6 @@ def run_algorithm():
         try:
             lines = result.stdout.split('\n')  # 按行分割输出
             for line in lines:
-                # 确保是纯数字行（过滤空行和非得分行）
                 if line.strip().isdigit():
                     return float(line.strip())
         except Exception as e:
@@ -83,24 +79,30 @@ def run_algorithm():
 
     return None
 
+
 def main():
-    """主程序：测试不同蒙图率并绘制曲线"""
     scores = []  # 存储每个蒙图率的平均得分
     cover_ratios = [i / 100 for i in range(1, 101)]  # 1% 到 100%的蒙图率
 
     # 遍历蒙图率
     for cover_ratio in cover_ratios:
         print(f"Testing cover ratio: {cover_ratio * 100:.1f}%")
-        cover_scores = []  # 存储每次测试的得分
 
-        for _ in range(rounds):
-            generate_test_image(cover_ratio)  # 生成测试数据
-            score = run_algorithm()  # 运行算法并获取得分
+        # 预生成10张图（无蒙版+蒙版）
+        images = generate_test_images(rounds, cover_ratio)
 
+        cover_scores = []
+        # 使用预生成的图片依次运行算法
+        for (img, cover_img) in images:
+            # 保存当前测试图片
+            img.save(f"{input_path}graph.png")
+            cover_img.save(f"{input_path}cover_graph.png")
+
+            score = run_algorithm()
             if score is not None:
                 cover_scores.append(score)
             else:
-                cover_scores.append(0)  # 如果得分获取失败，设置为 0
+                cover_scores.append(0)
 
         # 计算平均分
         avg_score = np.mean(cover_scores)

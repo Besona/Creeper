@@ -78,12 +78,11 @@ def run_algorithm_with_images(detection, correction, images):
     return np.mean(cover_scores)
 
 def main():
-    detection_range = range(0, 81, 5)  # [0, 5]
-
+    detection_range = range(0, 96, 5)
     # 首先计算所有可能的 correction_range 长度，找到最大列数
     all_lengths = []
     for detection in detection_range:
-        c_range = range(0, detection+1, 5)
+        c_range = range(0, detection + 1, 5)
         all_lengths.append(len(list(c_range)))
     max_cols = max(all_lengths)  # 最多多少个 correction 值
 
@@ -92,6 +91,11 @@ def main():
     # 预先生成图片
     images = generate_test_images(rounds, cover_ratio=0)
 
+    # 获取基准分数：使用 detection=100, correction=100 运行同样的图片集
+    # 如果需要，可以保证detection_range含有100或者单独运行一次
+    baseline_score = run_algorithm_with_images(100, 100, images)
+    print(f"Baseline Score (detection=100, correction=100): {baseline_score}")
+
     for detection in detection_range:
         print(f"Testing detection range: {detection}")
         row_scores = []
@@ -99,8 +103,13 @@ def main():
 
         for correction in correction_range:
             avg_score = run_algorithm_with_images(detection, correction, images)
-            row_scores.append(avg_score)
-            print(f"Detection {detection}, Correction {correction}, Avg Score: {avg_score}")
+            # 正则化处理
+            if baseline_score > 0:
+                normalized_score = avg_score / baseline_score
+            else:
+                normalized_score = 0
+            row_scores.append(normalized_score)
+            print(f"Detection {detection}, Correction {correction}, Avg Score: {avg_score}, Normalized: {normalized_score}")
 
         # 补齐至 max_cols 列
         while len(row_scores) < max_cols:
@@ -117,13 +126,20 @@ def main():
     ax = fig.add_subplot(111, projection='3d')
     surf = ax.plot_surface(X, Y, Z, cmap='viridis', edgecolor='k')
 
-    ax.set_title('Score Surface: Detection vs Correction', fontsize=16)
+    ax.set_title('Score Surface: Detection vs Correction (Normalized)', fontsize=16)
     ax.set_xlabel('Detection Range', fontsize=14)
     ax.set_ylabel('Correction Steps', fontsize=14)
-    ax.set_zlabel('Average Score', fontsize=14)
+    ax.set_zlabel('Normalized Score', fontsize=14)
     fig.colorbar(surf, ax=ax, shrink=0.5, aspect=10)
 
-    plt.savefig(f'{output_path}score_surface.png')
+    # 每 30 度生成一个视角，共 12 张图
+    for i in range(12):
+        azim = i * 30  # 每次旋转 30 度
+        ax.view_init(elev=30, azim=azim)
+        plt.savefig(f'{output_path}score_surface_normalized_angle_{azim}.png')
+        print(f"Saved view at azim={azim}")
+
+    plt.savefig(f'{output_path}score_surface_normalized.png')
     plt.show()
 
 if __name__ == '__main__':
